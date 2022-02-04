@@ -114,3 +114,4 @@ print(동물.isSuperset(of: 새))     // 동물은 새의 전체집합인가?
 
 
 var Test:String = "Test"
+var Test:String = "Test2"
