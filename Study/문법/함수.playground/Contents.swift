@@ -158,3 +158,66 @@ func chooseMathFunction(_ toAdd: Bool) -> CalculateTwoInts{
 }
 
 printMathResult(chooseMathFunction(true), 3, 5)
+
+typealias MoveFunc = (Int) ->Int
+
+
+func functionForMove(_ shouldGoLeft: Bool) -> MoveFunc{
+    func goRight(_ currentPosition: Int) -> Int{
+        return currentPosition + 1
+    }
+
+    func goLeft(_ currentPosition: Int) -> Int{
+        return currentPosition - 1
+    }
+
+    return shouldGoLeft ? goLeft : goRight
+}
+
+
+var position: Int = -4
+
+// 현 위치가 0보다 크므로 전달되는 인자 값은 true가 된다.
+let moveToZero: MoveFunc = functionForMove(position > 0)
+print("원점으로 갑시다.")
+
+// 원점에 도착하면(현 위치가 0이면) 반복문이 종료된다.
+while position != 0 {
+    print("\(position)...")
+    position = moveToZero(position)
+}
+
+// 종료되지 않는 함수
+/*func crashAndBurn() -> Never{
+    fatalError("Something very, very bad happened")
+}
+
+//crashAndBurn()  // 프로세스 종료 후 오류 보고
+
+func someFunction(isAllIsWell: Bool) {
+    guard isAllIsWell else{
+        print("Error")
+        crashAndBurn()
+    }
+    print("good")
+}
+
+someFunction(isAllIsWell: true)     // good
+someFunction(isAllIsWell: false)    // Error*/
+
+// 반환 값을 무시할 수 있는 함수
+// @discardablResult를 사용
+func say(_ something: String) -> String{
+    print(something)
+    return something
+}
+@discardableResult func discadableResultSay(_ something:String) -> String{
+    print(something)
+    return something
+}
+
+say("hello")
+
+// 반환 값을 사용하지 않을 수 있다고 미리 알렸기 때문에
+// 반환 값을 사용하지 않아도 컴파일러 경고가 발생하지 않는다
+discadableResultSay("hello")
