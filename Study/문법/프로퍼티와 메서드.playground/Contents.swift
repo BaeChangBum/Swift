@@ -241,3 +241,64 @@ var value:Account = Account()
 value.dollarValue = 2000.0
 
 
+// 키 경로
+/*class Person {
+    let name: String
+    
+    init(name: String){
+        self.name = name
+    }
+}
+
+struct Stuff{
+    var name: String
+    var owner: Person
+}
+
+let changbum = Person(name: "changbum")
+let hana = Person(name: "hana")
+let macbook = Stuff(name: "MacBook", owner: changbum)
+var iMac = Stuff(name: "iMac", owner: changbum)
+let iPhone = Stuff(name: "iPhone", owner: hana)
+
+let stuffNameKeyPath = \Stuff.name
+let ownerKeyPath = \Stuff.owner
+
+// \Stuff.owner.name과 같은 표현이 된다.
+let ownerNameKeyPath = ownerKeyPath.appending(path: \.name)
+
+print(macbook[keyPath: stuffNameKeyPath])
+print(iMac[keyPath: stuffNameKeyPath])
+print(iPhone[keyPath: stuffNameKeyPath])
+
+print(macbook[keyPath: ownerNameKeyPath])
+print(iMac[keyPath: ownerNameKeyPath])
+print(iPhone[keyPath: ownerNameKeyPath])
+
+iMac[keyPath: stuffNameKeyPath] = "iMac Pro"
+iMac[keyPath: ownerKeyPath] = hana
+
+print(iMac[keyPath: stuffNameKeyPath])
+print(iMac[keyPath: ownerNameKeyPath])*/
+
+struct Person {
+    let name: String
+    let nickname: String
+    let age: Int
+    
+    var isAdult: Bool {
+        return age > 18
+    }
+}
+
+let changbum: Person = Person(name: "changbum", nickname: "bear", age: 100)
+let hana: Person = Person(name: "hana", nickname: "ad", age: 100)
+let happy: Person = Person(name: "happy", nickname: "", age: 10)
+
+let family: [Person] = [changbum, hana, happy]
+let names: [String] = family.map(\.name)
+let nicknames: [String] = family.map(\.nickname)
+let adults: [String] = family.filter(\.isAdult).map(\.name)
+
+
+
