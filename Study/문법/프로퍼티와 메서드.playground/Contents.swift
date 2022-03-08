@@ -283,7 +283,7 @@ print(iMac[keyPath: ownerNameKeyPath])*/
 
 struct Person {
     let name: String
-    let nickname: String
+    let nickname: String?
     let age: Int
     
     var isAdult: Bool {
@@ -293,11 +293,11 @@ struct Person {
 
 let changbum: Person = Person(name: "changbum", nickname: "bear", age: 100)
 let hana: Person = Person(name: "hana", nickname: "ad", age: 100)
-let happy: Person = Person(name: "happy", nickname: "", age: 10)
+let happy: Person = Person(name: "happy", nickname: nil, age: 10)
 
 let family: [Person] = [changbum, hana, happy]
 let names: [String] = family.map(\.name)
-let nicknames: [String] = family.map(\.nickname)
+let nicknames: [String] = family.compactMap(\.nickname)
 let adults: [String] = family.filter(\.isAdult).map(\.name)
 
 
