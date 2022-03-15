@@ -300,5 +300,148 @@ let names: [String] = family.map(\.name)
 let nicknames: [String] = family.compactMap(\.nickname)
 let adults: [String] = family.filter(\.isAdult).map(\.name)
 
+/*class LevelClass {
+    var level: Int = 0 {
+        didSet{
+            print("Level \(level)")
+        }
+    }
+    
+    func levelUp() {
+        print("Level Up!")
+        level += 1
+    }
+    
+    func levelDown() {
+        print("Level Down!")
+        level -= 1
+        if level < 0 {
+            reset()
+        }
+    }
+    
+    func jumpLevel(to: Int) {
+        print("Jump to \(to)")
+        level = to
+    }
+    
+    func reset() {
+        print("reset")
+        level = 0
+    }
+}
+
+var levelClassInstance: LevelClass = LevelClass()
+
+levelClassInstance.levelUp()
+levelClassInstance.levelDown()
+levelClassInstance.levelDown()
+levelClassInstance.jumpLevel(to: 3)
+
+struct LevelStruct {
+    var level: Int = 0{
+        didSet {
+            print("Level \(level)")
+        }
+    }
+    
+    mutating func levelUp() {
+        print("Level Up!")
+        level += 1
+    }
+    
+    mutating func levelDown() {
+        print("Level Down!")
+        level -= 1
+        if level < 0 {
+            reset()
+        }
+    }
+    
+    mutating func jumpLevel(to: Int) {
+        print("Jump to \(to)")
+        level = to
+    }
+    
+    mutating func reset() {
+        print("reset")
+        level = 0
+    }
+}
+
+var levelClassInstance: LevelStruct = LevelStruct()
+
+levelClassInstance.levelUp()
+levelClassInstance.levelDown()
+levelClassInstance.levelDown()
+levelClassInstance.jumpLevel(to: 3)*/
 
 
+class LevelClass {
+    var level: Int = 0
+    
+    // 클래스의 인스턴스는 참조 타입이라서 self 프로퍼티에 다른 참조를 할당할 수 없다
+    /*func reset() {
+        self = LevelClass()
+    }*/
+}
+
+struct LevelStruct {
+    var level: Int = 0
+    
+    mutating func levelUp() {
+        print("Level Up!")
+        level += 1
+    }
+    
+    // 구조체나 열거형 등은 self 프로퍼티를 사용하여 자신 자체를 치환할 수 있다.
+    mutating func reset() {
+        print("reset")
+        self = LevelStruct()
+    }
+}
+
+var levelClassInstance: LevelStruct = LevelStruct()
+
+levelClassInstance.levelUp()
+
+enum OnOffSwitch {
+    case on, off
+    mutating func nextState() {
+        self = self == .on ? .off : .on
+    }
+}
+
+var toggle:OnOffSwitch = OnOffSwitch.off
+toggle.nextState()
+
+struct Puppy {
+    var name: String = "멍멍이"
+    
+    func callAsFunction() {
+        print("멍멍")
+    }
+    
+    func callAsFunction(destination: String) {
+        print("\(destination)로 달려갑니다.")
+    }
+    
+    func callAsFunction(something: String, times: Int) {
+        print("\(something)를 \(times)번 반복합니다.")
+    }
+    
+    func callAsFunction(color: String) -> String {
+        return "\(color) 응가"
+    }
+    
+    mutating func callAsFunction(name: String) {
+        self.name = name
+    }
+}
+
+var dogs: Puppy = Puppy()
+dogs.callAsFunction()
+dogs()
+dogs.callAsFunction(destination: "집")
+dogs.callAsFunction(something: "재주넘기", times: 3)
+dogs(name: "댕댕이")
